@@ -1,0 +1,18 @@
+.app-menu {
+  min-height: 100%;
+  width: 300px;
+  display: block;
+  box-sizing: border-box;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+
+  a {
+    display: block;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+  }
+}

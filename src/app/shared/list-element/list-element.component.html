@@ -1,0 +1,14 @@
+<div *ngIf="element" class="app-list-element__container">
+  <div class="app-list-element__checkbox">
+    <input type="checkbox" checked />
+  </div>
+  <img class="app-list-element__thumbnail" [src]="element.imageUrl" />
+  <div class="app-list-element__info">
+    <h3 class="app-list-element__title">{{element.title}}</h3>
+    <p class="app-list-element__description">{{element.description}}</p>
+  </div>
+  <div class="app-list-element__actions">
+    <button>Delete</button>
+    <button>Review</button>
+  </div>
+</div>

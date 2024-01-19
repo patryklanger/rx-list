@@ -1,0 +1,11 @@
+.app-layout {
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+
+  &__outlet {
+    height: 100%;
+    flex-grow: 1;
+  }
+}
