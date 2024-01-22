@@ -1,10 +1,10 @@
 import { RouterModule, Routes } from '@angular/router';
-import { ListContainerComponent } from '../list/list-container/list-container.component';
 import { NgModule } from '@angular/core';
+import { RxListContainerComponent } from './rx-list-container/rx-list-container.component';
 
 const routes: Routes = [{
   path: "",
-  component: ListContainerComponent
+  component: RxListContainerComponent
 }];
 
 @NgModule({
