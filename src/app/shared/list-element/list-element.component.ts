@@ -6,11 +6,15 @@ const NAME_KEBAB = 'app-list-element'
 @Component({
   selector: NAME_KEBAB,
   encapsulation: ViewEncapsulation.None,
-  host: { class: NAME_KEBAB },
+  host: {
+    class: NAME_KEBAB,
+    "[class.app-list-element--auto-size]": "autoSize",
+  },
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './list-element.component.html',
   styleUrls: ['./list-element.component.scss']
 })
 export class ListElementComponent {
   @Input() element: ListElement | undefined;
+  @Input() autoSize: boolean = false;
 }

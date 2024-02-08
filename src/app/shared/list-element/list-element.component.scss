@@ -11,12 +11,12 @@
 
   &__checkbox {
     align-self: center;
-    margin-right: 20px
+    margin-right: 20px;
   }
 
   &__info {
     width: 60%;
-    padding: 0 10px
+    padding: 0 10px;
   }
 
   &__actions {
@@ -37,5 +37,13 @@
   &__thumbnail {
     height: 100%;
     aspect-ratio: 1 / 1;
+  }
+
+  &--auto-size {
+    height: auto;
+
+    .app-list-element__thumbnail {
+      height: 100px;
+    }
   }
 }
