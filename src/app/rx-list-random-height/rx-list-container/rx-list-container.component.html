@@ -1,0 +1,6 @@
+<div class="scroll-container">
+  <rx-virtual-scroll-viewport autosize>
+    <app-list-element *rxVirtualFor="let element of list; trackBy: 'id'" [autoSize]="true" [element]="element">
+    </app-list-element>
+  </rx-virtual-scroll-viewport>
+</div>
