@@ -21,21 +21,19 @@ export class ListService {
     }
   });
 
-  private _list: ListElement[] = [];
-  private _list$ = new ReplaySubject<ListElement[]>();
+  private _list$ = new BehaviorSubject<ListElement[]>([]);
 
   constructor() {
     this.list$ = this._list$.asObservable();
   }
 
   initList(randomDesc = false) {
-    this._list = this.getList(randomDesc);
-    this._list$.next(this._list);
+    this._list$.next(this.getList(randomDesc));
   }
 
   deleteElement(id: string) {
-    this._list = this._list.filter(element => element.id !== id);
-    this._list$.next(this._list);
+    const list = this._list$.value.filter(element => element.id !== id);
+    this._list$.next(list);
   }
 
   private getList(randomDesc = false): ListElement[] {
