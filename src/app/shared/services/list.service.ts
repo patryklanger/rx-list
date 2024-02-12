@@ -27,8 +27,8 @@ export class ListService {
     this.list$ = this._list$.asObservable();
   }
 
-  initList(randomDesc = false) {
-    this._list$.next(this.getList(randomDesc));
+  initList(titlePrefix: string, randomDesc = false) {
+    this._list$.next(this.getList(titlePrefix, randomDesc));
   }
 
   deleteElement(id: string) {
@@ -36,10 +36,10 @@ export class ListService {
     this._list$.next(list);
   }
 
-  private getList(randomDesc = false): ListElement[] {
+  private getList(titlePrefix: string, randomDesc = false): ListElement[] {
     return Array.from({ length: 10000 }, (_, index) => ({
       id: `id-${index + 1}`,
-      title: `Element ${index + 1}`,
+      title: `${titlePrefix} element ${index + 1}`,
       description: randomDesc ? this.lorem.generateWords(this.randomIntFromInterval(1, 100)) : `Description ${index + 1}`,
       imageUrl: '/assets/homework.jpg',
       handled: false

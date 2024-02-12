@@ -15,7 +15,7 @@ export class ListContainerComponent implements OnDestroy {
   private _destroy$ = new Subject<void>();
 
   constructor(private listService: ListService) {
-    this.listService.initList();
+    this.listService.initList("Normal list");
 
     const list$ = this.listService.list$.pipe(
       tap(list => this.list = list),

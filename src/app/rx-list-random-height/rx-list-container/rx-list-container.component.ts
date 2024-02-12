@@ -15,7 +15,7 @@ export class RxListContainerComponent implements OnDestroy {
   private _destroy$ = new Subject<void>();
 
   constructor(private listService: ListService) {
-    this.listService.initList(true);
+    this.listService.initList("Rx autosize list", true);
 
     const list$ = this.listService.list$.pipe(
       tap(list => this.list = list),
