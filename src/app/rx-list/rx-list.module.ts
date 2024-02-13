@@ -10,6 +10,7 @@ import {
 import { RxListContainerComponent } from './rx-list-container/rx-list-container.component';
 import { RxListRoutingModule } from './rx-list-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -24,6 +25,7 @@ import { SharedModule } from '../shared/shared.module';
     RxVirtualScrollViewportComponent,
     FixedSizeVirtualScrollStrategy,
     RxListRoutingModule,
+    ReactiveFormsModule,
   ]
 })
 export class RxListModule {}

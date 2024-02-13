@@ -10,6 +10,7 @@ import {
 import { RxListContainerComponent } from './rx-list-container/rx-list-container.component';
 import { SharedModule } from '../shared/shared.module';
 import { RxListRandomHeightRoutingModule } from './rx-list-random-height-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -23,7 +24,8 @@ import { RxListRandomHeightRoutingModule } from './rx-list-random-height-routing
     SharedModule,
     RxVirtualScrollViewportComponent,
     AutoSizeVirtualScrollStrategy,
-    RxListRandomHeightRoutingModule
+    RxListRandomHeightRoutingModule,
+    ReactiveFormsModule
   ]
 })
-export class RxListRandomHeightModule { }
+export class RxListRandomHeightModule {}

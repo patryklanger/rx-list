@@ -1,29 +1,55 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Observable, Subject, takeUntil, tap } from 'rxjs';
 
 import { ListService } from '../../shared/services/list.service';
 import { ListElement } from '../../shared/list-element/list-element.model';
+import { RxVirtualScrollViewportComponent } from '@rx-angular/template/experimental/virtual-scrolling';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-rx-list-container',
   templateUrl: './rx-list-container.component.html',
   styleUrls: ['./rx-list-container.component.scss']
 })
-export class RxListContainerComponent implements OnDestroy {
+export class RxListContainerComponent implements OnInit, OnDestroy {
+
+  @ViewChild(RxVirtualScrollViewportComponent, { static: true }) viewport!: RxVirtualScrollViewportComponent;
+
   list: ListElement[] = [];
+  offset: number = 0;
+
+  readonly formControl = new FormControl<number | null>(null);
 
   private _destroy$ = new Subject<void>();
 
   constructor(private listService: ListService) {
     this.listService.initList("Rx list");
+  }
+
+  ngOnInit(): void {
     const list$ = this.listService.list$.pipe(
       tap(list => this.list = list),
       takeUntil(this._destroy$)
     );
 
+    const offset$ = this.viewport.scrolledIndexChange.pipe(
+      tap((offset) => this.offset = offset),
+      takeUntil(this._destroy$)
+    );
+
     [
-      list$
+      list$,
+      offset$
     ].forEach((x: Observable<unknown>) => x.subscribe());
+  }
+
+  scrollTo() {
+    const index = this.formControl.value;
+    if (index === null) {
+      return;
+    }
+
+    this.viewport.scrollToIndex(index);
   }
 
   ngOnDestroy(): void {

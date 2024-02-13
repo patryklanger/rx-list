@@ -1,3 +1,8 @@
+<div class="header">
+  <p><b>Scrolled index: </b>{{offset}}</p>
+  <div><input type="number" placeholder="Element index" [formControl]="formControl"><button (click)="scrollTo()">Scroll
+      to</button></div>
+</div>
 <div class="scroll-container">
   <rx-virtual-scroll-viewport [itemSize]="100">
     <app-list-element *rxVirtualFor="let element of list; trackBy: 'id'" [element]="element"></app-list-element>
