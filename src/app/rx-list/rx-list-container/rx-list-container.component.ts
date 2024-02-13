@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { Observable, Subject, takeUntil, tap } from 'rxjs';
 
 import { ListService } from '../../shared/services/list.service';
@@ -10,6 +10,7 @@ import { ListElementComponent } from 'src/app/shared/list-element/list-element.c
 @Component({
   selector: 'app-rx-list-container',
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: { class: 'app-rx-list-container' },
   templateUrl: './rx-list-container.component.html',
   styleUrls: ['./rx-list-container.component.scss']
@@ -25,18 +26,23 @@ export class RxListContainerComponent implements OnInit, OnDestroy {
 
   private _destroy$ = new Subject<void>();
 
-  constructor(private listService: ListService) {
+  constructor(
+    private listService: ListService,
+    private cdr: ChangeDetectorRef
+  ) {
     this.listService.initList("Rx list");
   }
 
   ngOnInit(): void {
     const list$ = this.listService.list$.pipe(
       tap(list => this.list = list),
+      tap(() => this.cdr.markForCheck()),
       takeUntil(this._destroy$)
     );
 
     const offset$ = this.viewport.scrolledIndexChange.pipe(
       tap((offset) => this.offset = offset),
+      tap(() => this.cdr.markForCheck()),
       takeUntil(this._destroy$)
     );
 
