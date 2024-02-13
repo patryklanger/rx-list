@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 
 import { ListService } from '../../shared/services/list.service';
 import { ListElement } from '../../shared/list-element/list-element.model';
@@ -8,6 +8,8 @@ import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-rx-list-container',
+  encapsulation: ViewEncapsulation.None,
+  host: { class: 'app-rx-list-container' },
   templateUrl: './rx-list-container.component.html',
   styleUrls: ['./rx-list-container.component.scss']
 })

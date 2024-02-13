@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Observable, Subject, takeUntil, tap } from 'rxjs';
 
 import { ListService } from '../../shared/services/list.service';
@@ -8,6 +8,8 @@ import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-rx-list-container',
+  encapsulation: ViewEncapsulation.None,
+  host: { class: 'app-rx-list-container' },
   templateUrl: './rx-list-container.component.html',
   styleUrls: ['./rx-list-container.component.scss']
 })
@@ -50,6 +52,7 @@ export class RxListContainerComponent implements OnInit, OnDestroy {
     }
 
     this.viewport.scrollToIndex(index);
+    this.formControl.setValue(null);
   }
 
   ngOnDestroy(): void {

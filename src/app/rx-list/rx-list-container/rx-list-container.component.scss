@@ -1,12 +1,18 @@
-.scroll-container{
-  height: 100%;
-  width: 100%;
-}
-
-.header {
+.app-rx-list-container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 10px;
+  flex-direction: column;
+  height: 100%;
+
+  &__scroll-container{
+    flex-grow: 1;
+    width: 100%;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+  }
 }
 
