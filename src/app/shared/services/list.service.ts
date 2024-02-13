@@ -1,11 +1,14 @@
 import { Injectable } from "@angular/core";
 import { ListElement } from "../list-element/list-element.model";
 import { LoremIpsum } from "lorem-ipsum";
+import { BehaviorSubject, Observable, ReplaySubject } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ListService {
+
+  list$: Observable<ListElement[]>;
 
   private lorem = new LoremIpsum({
     sentencesPerParagraph: {
@@ -18,10 +21,25 @@ export class ListService {
     }
   });
 
-  getList$(randomDesc = false): ListElement[] {
+  private _list$ = new BehaviorSubject<ListElement[]>([]);
+
+  constructor() {
+    this.list$ = this._list$.asObservable();
+  }
+
+  initList(titlePrefix: string, randomDesc = false) {
+    this._list$.next(this.getList(titlePrefix, randomDesc));
+  }
+
+  deleteElement(id: string) {
+    const list = this._list$.value.filter(element => element.id !== id);
+    this._list$.next(list);
+  }
+
+  private getList(titlePrefix: string, randomDesc = false): ListElement[] {
     return Array.from({ length: 10000 }, (_, index) => ({
       id: `id-${index + 1}`,
-      title: `Element ${index + 1}`,
+      title: `${titlePrefix} element ${index + 1}`,
       description: randomDesc ? this.lorem.generateWords(this.randomIntFromInterval(1, 100)) : `Description ${index + 1}`,
       imageUrl: '/assets/homework.jpg',
       handled: false
