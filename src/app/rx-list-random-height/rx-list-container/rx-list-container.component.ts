@@ -1,10 +1,11 @@
-import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
 
 import { ListService } from '../../shared/services/list.service';
 import { ListElement } from '../../shared/list-element/list-element.model';
 import { Subject, tap, takeUntil, Observable } from 'rxjs';
 import { RxVirtualScrollViewportComponent } from '@rx-angular/template/experimental/virtual-scrolling';
 import { FormControl } from '@angular/forms';
+import { ListElementComponent } from 'src/app/shared/list-element/list-element.component';
 
 @Component({
   selector: 'app-rx-list-container',
@@ -16,6 +17,8 @@ import { FormControl } from '@angular/forms';
 export class RxListContainerComponent implements OnInit, OnDestroy {
 
   @ViewChild(RxVirtualScrollViewportComponent, { static: true }) viewport!: RxVirtualScrollViewportComponent;
+
+  @ViewChildren(ListElementComponent) listElements: QueryList<ListElementComponent> | undefined;
 
   list: ListElement[] = [];
   offset: number = 0;
