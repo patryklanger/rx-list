@@ -18,8 +18,6 @@ export class RxListContainerComponent implements OnInit, OnDestroy {
 
   @ViewChild(RxVirtualScrollViewportComponent, { static: true }) viewport!: RxVirtualScrollViewportComponent;
 
-  @ViewChildren(ListElementComponent) listElements: QueryList<ListElementComponent> | undefined;
-
   list: ListElement[] = [];
   offset: number = 0;
 
